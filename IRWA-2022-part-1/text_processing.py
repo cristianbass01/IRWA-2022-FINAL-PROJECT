@@ -52,7 +52,11 @@ def build_map(dict_docs_tweet):
             doc_map[doc] += ['null']
 
         try:
-            doc_map[doc] += [tweet['entities']['hashtags'][0]['text']]
+            hashtags = []
+            for hash in  tweet['entities']['hashtags']:
+                hashtags.append('#' + hash['text'])
+                #doc_map[doc][0] = doc_map[doc][0].replace('#'+ hash['text'], '')
+            doc_map[doc] += hashtags
         except KeyError:
             doc_map[doc] += ['null']
 
@@ -67,7 +71,11 @@ def build_map(dict_docs_tweet):
             doc_map[doc] += ['null']
 
         try:
-            doc_map[doc] += [tweet['entities']['media'][0]['url']]
+            urls = []
+            for media in tweet['entities']['media']:
+                urls.append(media['url'])
+                #doc_map[doc][0] = doc_map[doc][0].replace(url['text'], '')
+            doc_map[doc] += urls
         except KeyError:
             doc_map[doc] += ['null']
 
@@ -90,8 +98,10 @@ def preprocess(str_line):
     stemmer = PorterStemmer()
     stop_words = set(stopwords.words("english"))
     str_line = str_line.lower()
-    str_line = re.sub('[^\w\s#@]+', ' ', str_line)
-    str_line = str_line.replace_all('http', '')
+    str_line = '|'.join([re.sub(r'(\s)#\w+', ' ', str_line.split('|')[0])] + str_line.split('|')[1:])
+    str_line = '|'.join([re.sub(r'(\s)(http).+', ' ', str_line.split('|')[0])] + str_line.split('|')[1:])
+    str_line = re.sub(r'[^\w\s#@]+', ' ', str_line)
+    str_line = re.sub(r'(\s)(http)[^\s]+', ' ', str_line)
     #str_line = str_line.translate(str.maketrans(dict.fromkeys("!\"$%&'()*+,-./:;<=>?[\]^_`{|}~", ' ')))
     str_line = str_line.split()  # Tokenize the text to get a list of terms
     str_line = [x for x in str_line if x not in stop_words]  # eliminate the stopwords
