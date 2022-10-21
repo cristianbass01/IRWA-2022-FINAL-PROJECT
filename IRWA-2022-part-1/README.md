@@ -5,7 +5,7 @@
 Members: 
 - Report by: Pat Roca (u172939), Marc Vallcorba (u173384), Aran Montero(u173478), Cristian Bassotto (u210426)
 - Code by: Cristian Bassotto (u210426)
-Github URL: 
+Github URL: https://github.com/cristianbass01/IRWA-2022-FINAL-PROJECT/tree/main/IRWA-2022-part-1
 
 
 ## Introduction
