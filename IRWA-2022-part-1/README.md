@@ -2,8 +2,10 @@
 # Part 1: Text Processing
 
 
-Members: Pat Roca (u172939), Marc Vallcorba (u173384), Aran Montero(u173478), Cristian Bassotto (u210426)
-Github URL: https://github.com/u172939/IRWA-2022-u172939-u173478-u173384 
+Members: 
+- Report by: Pat Roca (u172939), Marc Vallcorba (u173384), Aran Montero(u173478), Cristian Bassotto (u210426)
+- Code by: Cristian Bassotto (u210426)
+Github URL: 
 
 
 ## Introduction
@@ -27,3 +29,5 @@ With this preprocessing we will be able to create a clean and practical dataset 
 
 All the implementation is explained in the python notebook
 
+## Report
+The report of the group is available in a word format, but implementation of the code may change in some parts 
