@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block content %}
+
+<div>
+    Found <strong>{{ found_counter }}</strong> results...
+    <hr>
+    {% for item in results_list %}
+        <div class="pb-3">
+            <div style="background-color: rgba(250,250,250,.5); ; padding: 10px; border-radius: 10px;">
+                <div class="doc-title">
+                    <a href="{{ item.url }}"><h3 class="'doc-title-h3">{{item.title}}...</h3></a>
+                </div>
+                <div class="cited">
+                    <cite> <a href="{{ item.link }}">{{ item.link }}</a></cite>
+                </div>
+                <div class="doc-score">
+                    Score: {{"{:0.2f}".format(item.ranking)}}
+                </div>
+                <div class="doc-desc">
+                    {{ item.doc_date }} — {{ item.description }}
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}
+
+</div>
