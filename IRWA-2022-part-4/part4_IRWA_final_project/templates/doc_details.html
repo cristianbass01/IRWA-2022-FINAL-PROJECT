@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+body {
+  background-image: url('https://about.twitter.com/content/dam/about-twitter/en/brand-toolkit/brand-hero-desktop.jpg.twimg.1920.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Document Detail - IRWA Search Engine</title>
+</head>
+<body>
+<div><a href="#" onclick="history.go(-1)">Go Back</a></div>
+<div><a href="/stats" >Stats</a></div>
+<div><a href="/dashboard" >Dashboard</a></div>
+
+    <hr>
+        <div class="pb-3">
+            <div style="background-color: rgba(180,180,180, 0.5); ; padding: 10px; border-radius: 10px; width:55%;">
+                <div class='centered', style="font-size:30px">
+                   <cite> <a href="{{ tweet.tw_url }}"> Link to tweet: {{ tweet.tw_url }}</a></cite>
+                </div>
+                <hr>
+                <div class='centered', style="color:black ;font-size:30px">
+                   User: {{tweet.user}}, Followers count: {{tweet.followers}}
+                </div>
+                <div class='centered', style="color:black;font-size:20px">
+                   {{tweet.date}}
+                </div>
+                <hr>
+                <div class='centered', style="font-size:20px">
+                   <cite> <a href="{{ tweet.url }}"> Linked page: {{ tweet.url }}</a></cite>
+                </div>
+                <hr>
+                <div class='centered', style="color:black;font-size:20px">
+                   {{tweet.text}}
+                </div>
+                <hr>
+                <div class='centered', style="color:black;font-size:20px">
+                   Hashtags: {{tweet.hashtags}}
+                </div>
+                <div class='centered', style="color:black;font-size:20px">
+                   Likes: {{tweet.likes}}, Retweets: {{tweet.retweets}}
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>
