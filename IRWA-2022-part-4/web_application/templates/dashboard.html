@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block header %}
+    <!-- Next tag loads Charts.js https://www.chartjs.org/docs/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"
+            integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+
+    <!--
+    Examples of what to show in Dashboard:
+
+    - Ranking of visited documents (from results page)
+    - Visitor's preferred browsers
+    - Visitor's city (from IP)
+    - preferred queries ranking
+    - preferred terms
+    - etc.
+
+    -->
+
+    <script>
+        // 'visited_docs' is the data coming from Python code.
+        // load the python list in the JS variable 'visits_list':
+        const visits_list = {{ visited_docs | tojson | safe }};
+        console.log("visited docs: ")
+        console.log(visits_list)
+    </script>
+
+    <h5>Ranking of Visited Documents</h5>
+    <canvas id="dailyVisits" width="400" height="400"></canvas>
+    <script>
+        // use JS map function top get just the tweet ids as labels
+        const visitsLabels = visits_list.map(a => "id: " + a.doc_id);
+        const visitsData = visits_list.map(a => a.counter);
+        const chartData1 = {
+            labels: visitsLabels,
+            datasets: [{
+                label: 'Visits count',
+                // data: [65, 59, 80, 81, 56, 55, 40],
+                data: visitsData,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const ctx = document.getElementById('dailyVisits').getContext('2d');
+
+        // This will render the chart
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData1,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+
+    <hr>
+    <h5>Print Python data for verification with graph above...</h5>
+    {% for doc in visited_docs %}
+        <div class="pb-3">
+            <div class="">
+                <span class="text-dark"> ({{ doc.counter }} visits) </span> — id: {{ doc.doc_id }}
+                — {{ doc.description }}
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+
+    <script>
+        // 'visited_docs' is the data coming from Python code.
+        // load the python list in the JS variable 'visits_list':
+        const visits_list_term = {{ visited_terms | tojson | safe }};
+        console.log("visited terms: ")
+        console.log(visits_list_term)
+    </script>
+
+    <h5>Ranking of Visited Terms</h5>
+    <canvas id="dailyTerms" width="400" height="400"></canvas>
+    <script>
+        // use JS map function top get just the tweet ids as labels
+        const visitsLabels2 = visits_list_term.map(a =>  a[0]);
+        const visitsData2 = visits_list_term.map(a => a[1]);
+        const chartData2 = {
+            labels: visitsLabels2,
+            datasets: [{
+                label: 'Visits count',
+                data: visitsData2,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const ctx = document.getElementById('dailyTerms').getContext('2d');
+
+        // This will render the chart
+        const myChart2 = new Chart(ctx, {
+            type: 'line',
+            data: chartData2,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+
+
+
+{% endblock %}
