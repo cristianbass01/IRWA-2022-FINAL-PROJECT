@@ -2,8 +2,8 @@
 A UPF project for the course in Information Retrieval and Web Analytics
 
 It's divided in 4 parts:
-- Text Processing
-- Indexing and evaluation
-- Ranking
-- User Interface and Web Analytics (actual application)
+1. Text Processing
+2. Indexing and evaluation
+3. Ranking
+4. User Interface and Web Analytics (actual application)
 
