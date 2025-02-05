@@ -6,4 +6,3 @@ It's divided in 4 parts:
 2. Indexing and evaluation
 3. Ranking
 4. User Interface and Web Analytics (actual application)
-
